@@ -1,34 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Lesson Next.js Stripe Checkout
 
-## Getting Started
+参考
+[https://vercel.com/guides/getting-started-with-nextjs-typescript-stripe](https://vercel.com/guides/getting-started-with-nextjs-typescript-stripe)
 
-First, run the development server:
+- checkout
+  [https://blog.ojisan.io/how-to-stripe](https://blog.ojisan.io/how-to-stripe)
+- subscription
+  [https://medium.com/@andreiushakov/build-a-subscription-checkout-form-with-next-js-stripe-elements-and-antd-d5434b83bd51](https://medium.com/@andreiushakov/build-a-subscription-checkout-form-with-next-js-stripe-elements-and-antd-d5434b83bd51)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## `.env.local`を作成
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+API キーとシークレットを操作するときは,バージョン管理されないように`.env.local`にで設定する
+Stripe の登録を済まして,テスト用の公開鍵と秘密鍵を`.env.local`にコピペ
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Stripe をインストール
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+`yarn add stripe @stripe/react-stripe-js @stripe/stripe-js`
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- stripe
+  server が使う stripe ライブラリ
+- @stripe/react-stripe-js
+  client が使う stripe ライブラリ
+- @stripe/stripe-js
+  stripe の入力フォームを作る UI キット
 
-## Learn More
+## TypeScript の対応
 
-To learn more about Next.js, take a look at the following resources:
+`yarn add -D typescript @types/react`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ついでに src 構成に
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Stripe と通信する関数の作成
 
-## Deploy on Vercel
+`./utils/get-stripejs.ts`を作成
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Sessiton を作成する API を作成
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`./pages/api/checkout_sessions/index.ts`を作成
+
+それを呼び出す Component を作成
+`./components/CheckoutForm.tsx`
