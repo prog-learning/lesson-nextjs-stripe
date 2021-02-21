@@ -80,6 +80,7 @@ export const SubscriptionCheckoutForm: React.FC = (props: any) => {
   };
 
   const cardOptions: StripeCardElementOptions = {
+    hideIcon: false,
     iconStyle: "solid",
     hidePostalCode: true,
     style: {
@@ -91,7 +92,7 @@ export const SubscriptionCheckoutForm: React.FC = (props: any) => {
         fontSize: "15px",
         fontSmoothing: "antialiased",
         ":-webkit-autofill": { color: "#fce883" },
-        "::placeholder": { color: "#bfbfbf" }
+        "::placeholder": { color: "#999" }
       },
       invalid: {
         iconColor: "#ffc7ee",
